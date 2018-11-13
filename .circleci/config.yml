@@ -4,9 +4,8 @@ jobs:
     docker:
       - image: eosio/cdt:v1.4.0
       - image: eosio/eos:v1.4.3
-        commands:
-          - "keosd --http-server-address=0.0.0.0:5555"
-          - "nodeos --version || true"
+        command:
+          ["keosd --http-server-address=0.0.0.0:5555 & nodeos --version || true"]
     working_directory: ~
 
     steps:
