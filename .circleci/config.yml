@@ -51,7 +51,7 @@ jobs:
       - image: eosio/eos:v1.4.3
         command:
           # expose nodeos at 7777
-          ["nodeos", "-e", "-p", "eosio", "--plugin eosio::producer_plugin", "--plugin eosio::chain_api_plugin", "--plugin eosio::history_plugin", "--plugin eosio::history_api_plugin", "--plugin eosio::http_plugin", "-d /mnt/dev/data", "--config-dir /mnt/dev/config", "--http-server-address=0.0.0.0:7777", "--access-control-allow-origin=*", "--contracts-console" ,"--http-validate-host=false", "--filter-on='*'"]
+          ["nodeos -e -p eosio --plugin eosio::producer_plugin --plugin eosio::chain_api_plugin --plugin eosio::history_plugin --plugin eosio::history_api_plugin --plugin eosio::http_plugin -d /mnt/dev/data --config-dir /mnt/dev/config --http-server-address=0.0.0.0:7777 --access-control-allow-origin=* --contracts-console --http-validate-host=false --filter-on='*'"]
     working_directory: ~
     steps:
       - checkout
