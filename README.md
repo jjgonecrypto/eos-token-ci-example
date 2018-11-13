@@ -4,10 +4,13 @@
 
 This repo takes the EOSIO.token example and wraps it in a nodejs testing and deployment environment.
 
-
 > Note: much of this was inspired by the work of @MrToph with his Yeoman generator https://github.com/MrToph/generator-eos
 
+### Related Reading
+
 **New to EOS?** [Here's a guide I've put together](./EOSContractDev.md) to get started understanding the EOS ecosystem from a developer's perspective. It includes the various ways to get your local development environment setup
+
+**Developing tokens yourself?** [Here's a list of gotchas for would-be token developers](./EOSTokenGotchas.md), especially for those coming from Ethereum ERC20 standards.
 
 ## Local tools required
 

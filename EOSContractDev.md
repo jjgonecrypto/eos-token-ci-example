@@ -49,15 +49,13 @@ When creating an account against a local `nodeos` deployment, you can run `cleos
 
 E.g. `cleos system newaccount --stake-net "2 EOS" --stake-cpu "2 EOS" --buy-ram "2 EOS" [creator] [name] [OwnerPubKey]`
 
-### Actions
-
-#### Transferring EOS
+### Transferring EOS
 
 `cleos transfer [sender] [recipient] [amount] [memo]`
 
 e.g. `cleos transfer account11111 account22222 "0.0001 EOS" "memo text"`
 
-#### Publishing a Contract
+### Publishing a Contract
 
 1. Create an account to deploy as (assuming `cleos wallet unlock`)
 
@@ -77,17 +75,24 @@ e.g. `cleos transfer account11111 account22222 "0.0001 EOS" "memo text"`
 
     > Note: you can push new versions of the same contract the same way (qu: how does this work?)
 
-#### Interacting with the contract's actions
+### Interacting with the contract's actions
 
 `cleos push action [account] [action] '[data]' -p [user]@active`
 
 e.g. `cleos push action eoisio.token issue '[ "alice", "100.0000 SYS", "memo" ]' - eosio@active`
 
-#### Getting token information
+### Getting token information
 
 Get the statistics about a token (that was published under the account `contract`)
 `cleos get currency stats [contract] [symbol]`
 
+e.g. `cleos get currency stats eosio.token SYS`
+
+> This is the same as running `cleos get table eosio.token SYS stat`
+
 And get an individual's ownership of that token (that was published under the account `contract`)
 `cleos get currency balance [contract] [account]`
 
+e.g. `cleos get currency balance eosio.token someusername`
+
+> This is the same as running `cleos get table eosio.token someusername accounts`
