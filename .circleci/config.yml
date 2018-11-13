@@ -33,13 +33,13 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-        at: .
+          at: .
       - run: mkdir build && eosio-cpp --version | tee build/temp.txt
       - persist_to_workspace:
-        root: .
-        paths:
-          - node_modules
-          - build
+          root: .
+          paths:
+            - node_modules
+            - build
 
   test:
     docker:
@@ -48,7 +48,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-        at: .
+          at: .
       - run: ls -lat
       - run: cat build/temp.txt
       - run: nodeos --version || true
