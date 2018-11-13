@@ -4,7 +4,8 @@ jobs:
     docker:
       - image: eosio/cdt:v1.4.0
       - image: eosio/eos:v1.4.3
-        command: [nodeos, --version]
+        command:
+          [nodeos, --version, '|| true']
     working_directory: ~
 
     steps:
