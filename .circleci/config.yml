@@ -2,22 +2,23 @@ version: 2
 jobs:
   build:
     docker:
-      - image: eosio/eos:v1.4.3
       - image: eosio/cdt:v1.4.0
+      - image: eosio/eos:v1.4.3
+        command: [nodeos, --version]
     working_directory: ~
 
     steps:
       - checkout
 
-      - run:
-          name: NODEOS version
-          command: |
-            nodeos --version
+      # - run:
+      #     name: NODEOS version
+      #     command: |
+      #       nodeos --version
 
-      - run:
-          name: KEOSD version
-          command: |
-            keosd --version
+      # - run:
+      #     name: KEOSD version
+      #     command: |
+      #       keosd --version
 
       - run:
           name: EOSIO-CPP version

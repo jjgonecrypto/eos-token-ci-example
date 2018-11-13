@@ -1,5 +1,7 @@
 # EOS Token CI Example
 
+[![CircleCI](https://circleci.com/gh/justinjmoses/eos-token-ci-example.svg?style=svg)](https://circleci.com/gh/justinjmoses/eos-token-ci-example)
+
 > Updated as of EOS **v1.4.3**
 
 This repo takes the EOSIO.token example and wraps it in a nodejs testing and deployment environment.
