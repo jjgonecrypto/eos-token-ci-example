@@ -26,3 +26,5 @@ jobs:
           name: EOSIO-CPP version
           command: |
             eosio-cpp --version
+
+            curl localhost:5555
