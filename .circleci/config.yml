@@ -2,7 +2,7 @@ version: 2
 jobs:
   prepare:
     docker:
-      - image: eosio/eos:v1.4.3
+      - image: circleci/node:8.11
     working_directory: ~
     steps:
       - checkout
