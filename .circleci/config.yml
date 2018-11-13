@@ -5,7 +5,8 @@ jobs:
       - image: eosio/cdt:v1.4.0
       - image: eosio/eos:v1.4.3
         command:
-          [nodeos, --version, '|| true']
+          # [nodeos, --version, '|| true']
+          [keosd, "--http-server-address=0.0.0.0:5555"]
     working_directory: ~
 
     steps:
