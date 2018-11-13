@@ -46,7 +46,7 @@ jobs:
       - image: circleci/node:8.11
       - image: eosio/eos:v1.4.3
         command:
-          [keosd, "--version", "||", "true"]
+          [keosd, "--http-server-address=0.0.0.0:5555"]
     working_directory: ~
     steps:
       - checkout
@@ -54,7 +54,7 @@ jobs:
           at: .
       - run: ls -lat
       - run: cat build/temp.txt
-      - run: nodeos --version || true
+      - run: curl http://localhost:5555
 
 workflows:
   version: 2
