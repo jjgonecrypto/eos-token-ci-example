@@ -60,14 +60,16 @@ jobs:
             "--plugin=eosio::history_plugin",
             "--plugin=eosio::history_api_plugin",
             "--plugin=eosio::http_plugin",
-            "-d=/mnt/dev/data",
+            "--data-dir=/mnt/dev/data",
+            "--enable-stale-production",
+            "--producer-name=eosio",
             "--config-dir=/mnt/dev/config",
             "--access-control-allow-origin=*",
             "--contracts-console",
             "--http-validate-host=false",
             "--filter-on=*"
           ]
-          # -d /mnt/dev/data --config-dir /mnt/dev/config --http-server-address=0.0.0.0:7777 --access-control-allow-origin=* --contracts-console --http-validate-host=false --filter-on='*'"]
+
     working_directory: ~
     steps:
       - checkout
