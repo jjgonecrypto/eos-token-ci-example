@@ -1,0 +1,27 @@
+{
+  "name": "eos-token-ci-example",
+  "version": "1.0.0",
+  "description": "An example repo with EOS tokens connected to Continuous Integration (CI) server",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/justinjmoses/eos-token-ci-example.git"
+  },
+  "keywords": [
+    "eos",
+    "smart-contracts",
+    "ci",
+    "testing"
+  ],
+  "author": "justin j. moses",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/justinjmoses/eos-token-ci-example/issues"
+  },
+  "homepage": "https://github.com/justinjmoses/eos-token-ci-example#readme"
+}
