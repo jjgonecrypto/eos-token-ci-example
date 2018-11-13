@@ -46,10 +46,12 @@ jobs:
       - image: circleci/node:8.11
       - image: eosio/eos:v1.4.3
         command:
+          # expose keosd at 5555
           [keosd, "--http-server-address=0.0.0.0:5555"]
       - image: eosio/eos:v1.4.3
         command:
-          ["nodeos", "-e", "-p", "eosio", "--plugin eosio::producer_plugin", "--plugin eosio::chain_api_plugin", "--plugin eosio::history_plugin", "--plugin eosio::history_api_plugin", "--plugin eosio::http_plugin", "-d /mnt/dev/data", "--config-dir /mnt/dev/config", "--http-server-address=0.0.0.0:7777", "--access-control-allow-origin=*", "--contracts-console" ,"--http-validate-host=false", "--filter-on='*'"]
+          # expose nodeos at 7777
+          ["exec", "nodeos", "-e", "-p", "eosio", "--plugin eosio::producer_plugin", "--plugin eosio::chain_api_plugin", "--plugin eosio::history_plugin", "--plugin eosio::history_api_plugin", "--plugin eosio::http_plugin", "-d /mnt/dev/data", "--config-dir /mnt/dev/config", "--http-server-address=0.0.0.0:7777", "--access-control-allow-origin=*", "--contracts-console" ,"--http-validate-host=false", "--filter-on='*'"]
     working_directory: ~
     steps:
       - checkout
@@ -58,6 +60,7 @@ jobs:
       - run: ls -lat
       - run: cat build/temp.txt
       - run: curl http://localhost:5555
+      - run: curl http://localhost:7777      -
 
 workflows:
   version: 2
