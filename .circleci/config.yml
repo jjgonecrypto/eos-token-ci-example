@@ -43,7 +43,10 @@ jobs:
 
   test:
     docker:
+      - image: circleci/node:8.11
       - image: eosio/eos:v1.4.3
+        command:
+          [keosd, "--version", "||", "true"]
     working_directory: ~
     steps:
       - checkout
