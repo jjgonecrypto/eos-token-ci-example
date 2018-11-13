@@ -84,7 +84,7 @@ jobs:
       # prove keosd is running
       - run: curl http://localhost:5555
       # prove nodeos is running
-      - run: curl http://localhost:7777
+      - run: curl http://localhost:7777/v1/chain/get_info
       # prove that we are running nodejs
       - run: node --version
 
