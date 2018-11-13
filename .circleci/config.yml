@@ -75,10 +75,18 @@ jobs:
       - checkout
       - attach_workspace:
           at: .
+      # show files now in workspace
       - run: ls -lat
+      # prove that npm modules were installed
+      - run: ls -late node_modules
+      # prove that files built with eosio-cpp appear here
       - run: cat build/temp.txt
+      # prove keosd is running
       - run: curl http://localhost:5555
+      # prove nodeos is running
       - run: curl http://localhost:7777
+      # prove that we are running nodejs
+      - run: node --version
 
 workflows:
   version: 2
