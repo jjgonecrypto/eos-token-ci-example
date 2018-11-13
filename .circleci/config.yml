@@ -1,29 +1,66 @@
 version: 2
 jobs:
-  build:
+  prepare:
     docker:
-      - image: eosio/cdt:v1.4.0
       - image: eosio/eos:v1.4.3
-        command:
-          [keosd, "--http-server-address=0.0.0.0:5555", "&",nodeos, "--version", "||", "true"]
     working_directory: ~
-
     steps:
       - checkout
 
-      # - run:
-      #     name: NODEOS version
-      #     command: |
-      #       nodeos --version
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1.0-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1.0-dependencies-
 
-      # - run:
-      #     name: KEOSD version
-      #     command: |
-      #       keosd --version
+      - run: npm install
 
-      - run:
-          name: EOSIO-CPP version
-          command: |
-            eosio-cpp --version
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1.0-dependencies-{{ checksum "package.json" }}
 
-            curl localhost:5555
+      - persist_to_workspace:
+          root: .
+          paths:
+            - node_modules
+
+  compile:
+    docker:
+      - image: eosio/cdt:v1.4.0
+    working_directory: ~
+    steps:
+      - checkout
+      - attach_workspace:
+        at: .
+      - run: mkdir build && eosio-cpp --version | tee build/temp.txt
+      - persist_to_workspace:
+        root: .
+        paths:
+          - node_modules
+          - build
+
+  test:
+    docker:
+      - image: eosio/eos:v1.4.3
+    working_directory: ~
+    steps:
+      - checkout
+      - attach_workspace:
+        at: .
+      - run: ls -lat
+      - run: cat build/temp.txt
+      - run: nodeos --version || true
+
+workflows:
+  version: 2
+  development:
+    jobs:
+      - prepare:
+      - compile:
+          requires:
+            - prepare
+      - test:
+          requires:
+            - compile
