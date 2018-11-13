@@ -55,9 +55,9 @@ jobs:
 
 workflows:
   version: 2
-  development:
+  dev:
     jobs:
-      - prepare:
+      - prepare
       - compile:
           requires:
             - prepare
