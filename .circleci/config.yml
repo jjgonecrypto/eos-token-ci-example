@@ -35,10 +35,10 @@ jobs:
       - attach_workspace:
           at: .
       - run:
-        name: Test
-        command: |
-          mkdir build && \
-          eosio-cpp eosio.contracts/eosio.token/src/eosio.token.cpp -I eosio.contracts/eosio.token/include/ -o build/eosio.token.wasm
+          name: Test
+          command: |
+            mkdir build && \
+            eosio-cpp eosio.contracts/eosio.token/src/eosio.token.cpp -I eosio.contracts/eosio.token/include/ -o build/eosio.token.wasm
       - persist_to_workspace:
           root: .
           paths:
