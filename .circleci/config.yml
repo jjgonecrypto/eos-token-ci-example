@@ -34,7 +34,11 @@ jobs:
       - checkout
       - attach_workspace:
           at: .
-      - run: mkdir build && eosio-cpp --version | tee build/temp.txt
+      - run:
+        name: Test
+        command: |
+          mkdir build && \
+          eosio-cpp eosio.contracts/eosio.token/src/eosio.token.cpp -I eosio.contracts/eosio.token/include/ -o build/eosio.token.wasm
       - persist_to_workspace:
           root: .
           paths:
@@ -80,7 +84,7 @@ jobs:
       # prove that npm modules were installed
       - run: ls -lat node_modules
       # prove that files built with eosio-cpp appear here
-      - run: cat build/temp.txt
+      - run: ls -lat build
       # prove keosd is running
       - run: curl http://localhost:5555
       # prove nodeos is running
