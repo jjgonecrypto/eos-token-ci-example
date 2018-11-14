@@ -28,7 +28,7 @@ jobs:
 
   compile:
     docker:
-      - image: eosio/cdt:v1.4.0
+      - image: justinjmoses/eosio-cdt:v1.4.1
     working_directory: ~
     steps:
       - checkout
