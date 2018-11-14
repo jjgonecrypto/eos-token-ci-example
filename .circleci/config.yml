@@ -6,6 +6,7 @@ jobs:
     working_directory: ~
     steps:
       - checkout
+      # checkout submodules now as the CDT image below doesn't have git!
       - run: git submodule update --init --recursive
 
       # Download and cache dependencies
