@@ -37,7 +37,8 @@ jobs:
       - run:
           name: Test
           command: |
-            mkdir build && \
+            git submodule update --init --recursive
+            mkdir build
             eosio-cpp eosio.contracts/eosio.token/src/eosio.token.cpp -I eosio.contracts/eosio.token/include/ -o build/eosio.token.wasm
       - persist_to_workspace:
           root: .
