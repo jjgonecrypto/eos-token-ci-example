@@ -4,7 +4,12 @@
   "description": "An example repo with EOS tokens connected to Continuous Integration (CI) server",
   "main": "index.js",
   "dependencies": {
-    "eosjs": "~20.0.0-beta2"
+    "chalk": "~2.4.1",
+    "dotenv": "~6.1.0",
+    "eosjs": "~20.0.0-beta2",
+    "eosjs-ecc": "~4.0.4",
+    "lodash": "~4.17.11",
+    "node-fetch": "~2.3.0"
   },
   "devDependencies": {
     "babel-eslint": "~10.0.1",

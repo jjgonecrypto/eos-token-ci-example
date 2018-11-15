@@ -3,19 +3,24 @@
 // const { sendTransaction } = require('../utils');
 
 // const { CONTRACT_ACCOUNT } = process.env;
+const { createTokenAccount, deployTokenContract } = require('../initializer');
 
-describe(`contract`, () => {
+describe('contract', () => {
   // create account via eosio
   // what if the account exists?
 
+  const account = 'token.test.1';
+
   // deploy contract
+  beforeAll(async () => {
+    await createTokenAccount({ account });
+    await deployTokenContract({ account });
+  });
 
-  // beforeEach(async () => {
-  //   const result = await sendTransaction({ name: `testreset` });
-  //   console.dir(result);
-  // });
-
-  test(`something`, async () => {
+  test('something', async () => {
+    expect(true).toBe(true);
+  });
+  test('else', async () => {
     expect(true).toBe(true);
   });
 });
