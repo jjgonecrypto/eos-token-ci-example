@@ -6,6 +6,7 @@
 const { createTokenAccount, deployTokenContract } = require('../initializer');
 
 describe('contract', () => {
+  jest.setTimeout(20e3);
   // create account via eosio
   // what if the account exists?
 
