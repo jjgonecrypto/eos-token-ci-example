@@ -2,100 +2,83 @@ version: 2
 jobs:
   prepare:
     docker:
-      - image: circleci/node:8.11
-    working_directory: ~
+      - image: 'circleci/node:8.11'
+    working_directory: null
     steps:
       - checkout
-      # checkout submodules now as the CDT image below doesn't have git!
       - run: git submodule update --init --recursive
-
-      # Download and cache dependencies
       - restore_cache:
           keys:
-            - v1.0-dependencies-{{ checksum "package.json" }}
-            # fallback to using the latest cache if no exact match is found
+            - 'v1.0-dependencies-{{ checksum "package.json" }}'
             - v1.0-dependencies-
-
       - run: npm install
-
+      - run: npm run lint
       - save_cache:
           paths:
             - node_modules
-          key: v1.0-dependencies-{{ checksum "package.json" }}
-
+          key: 'v1.0-dependencies-{{ checksum "package.json" }}'
       - persist_to_workspace:
           root: .
           paths:
             - node_modules
             - eosio.contracts
-
   compile:
     docker:
-      - image: justinjmoses/eosio-cdt:1.4.1
-    working_directory: ~
+      - image: 'justinjmoses/eosio-cdt:1.4.1'
+    working_directory: null
     steps:
       - checkout
       - attach_workspace:
           at: .
       - run:
           name: Test
-          command: |
+          command: >
             mkdir build
-            eosio-cpp eosio.contracts/eosio.token/src/eosio.token.cpp -I eosio.contracts/eosio.token/include/ -o build/eosio.token.wasm
+
+            eosio-cpp eosio.contracts/eosio.token/src/eosio.token.cpp -I
+            eosio.contracts/eosio.token/include/ -o build/eosio.token.wasm
       - persist_to_workspace:
           root: .
           paths:
             - node_modules
             - eosio.contracts
             - build
-
   test:
     docker:
-      - image: circleci/node:8.11
-      - image: eosio/eos:v1.4.3
+      - image: 'circleci/node:8.11'
+      - image: 'eosio/eos:v1.4.3'
         command:
-          # expose keosd at 5555
-          [keosd, "--http-server-address=0.0.0.0:5555"]
-      - image: eosio/eos:v1.4.3
+          - keosd
+          - '--http-server-address=0.0.0.0:5555'
+      - image: 'eosio/eos:v1.4.3'
         command:
-          # expose nodeos at 7777
-          [
-            nodeos,
-            "--http-server-address=0.0.0.0:7777",
-            "--plugin=eosio::producer_plugin",
-            "--plugin=eosio::http_plugin",
-            "--plugin=eosio::chain_api_plugin",
-            "--plugin=eosio::history_plugin",
-            "--plugin=eosio::history_api_plugin",
-            "--plugin=eosio::http_plugin",
-            "--data-dir=/mnt/dev/data",
-            "--enable-stale-production",
-            "--producer-name=eosio",
-            "--config-dir=/mnt/dev/config",
-            "--access-control-allow-origin=*",
-            "--contracts-console",
-            "--http-validate-host=false",
-            "--filter-on=*"
-          ]
-
-    working_directory: ~
+          - nodeos
+          - '--http-server-address=0.0.0.0:7777'
+          - '--plugin=eosio::producer_plugin'
+          - '--plugin=eosio::http_plugin'
+          - '--plugin=eosio::chain_api_plugin'
+          - '--plugin=eosio::history_plugin'
+          - '--plugin=eosio::history_api_plugin'
+          - '--plugin=eosio::http_plugin'
+          - '--data-dir=/mnt/dev/data'
+          - '--enable-stale-production'
+          - '--producer-name=eosio'
+          - '--config-dir=/mnt/dev/config'
+          - '--access-control-allow-origin=*'
+          - '--contracts-console'
+          - '--http-validate-host=false'
+          - '--filter-on=*'
+    working_directory: null
     steps:
       - checkout
       - attach_workspace:
           at: .
-      # show files now in workspace
       - run: ls -lat
-      # prove that npm modules were installed
       - run: ls -lat node_modules
-      # prove that files built with eosio-cpp appear here
       - run: ls -lat build
-      # prove keosd is running
-      - run: curl http://localhost:5555
-      # prove nodeos is running
-      - run: curl http://localhost:7777/v1/chain/get_info
-      # prove that we are running nodejs
+      - run: 'curl http://localhost:5555'
+      - run: 'curl http://localhost:7777/v1/chain/get_info'
       - run: node --version
-
 workflows:
   version: 2
   dev:

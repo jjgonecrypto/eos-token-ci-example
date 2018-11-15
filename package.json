@@ -7,9 +7,18 @@
     "eosjs": "~20.0.0-beta2"
   },
   "devDependencies": {
-    "jest": "~23.6.0"
+    "babel-eslint": "~10.0.1",
+    "eslint": "~5.9.0",
+    "eslint-config-last": "0.0.5",
+    "eslint-config-prettier": "~3.3.0",
+    "eslint-plugin-import": "~2.14.0",
+    "eslint-plugin-prettier": "~3.0.0",
+    "jest": "~23.6.0",
+    "prettier": "~1.15.2"
   },
   "scripts": {
+    "format": "prettier --write \"*.js\"",
+    "lint": "eslint .",
     "test": "jest"
   },
   "repository": {
