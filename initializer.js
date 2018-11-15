@@ -2,6 +2,7 @@
 
 const path = require('path');
 const ecc = require('eosjs-ecc');
+const { green } = require('chalk');
 const { api } = require('./config');
 const { sendTransaction, getErrorDetail, deployContract } = require('./utils');
 
@@ -67,10 +68,11 @@ module.exports = {
   },
 
   async createTokenAction({ account, max, symbol }) {
+    const name = 'create';
     try {
       await sendTransaction({
         account,
-        name: 'create',
+        name,
         actor: account,
         data: {
           issuer: 'eosio',
@@ -78,7 +80,7 @@ module.exports = {
         },
       });
     } catch (error) {
-      console.error(`Could not issue token: ${symbol} `, getErrorDetail(error));
+      console.error(`Could not invoke action ${green(name)}: ${symbol} `, getErrorDetail(error));
     }
   },
 };
