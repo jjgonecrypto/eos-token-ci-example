@@ -24,4 +24,7 @@ describe('contract', () => {
   test('else', async () => {
     expect(true).toBe(true);
   });
+  test('altogether', async () => {
+    expect(true).toBe(true);
+  });
 });
