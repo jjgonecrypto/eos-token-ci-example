@@ -24,7 +24,7 @@ describe('eosio.token', () => {
     const symbol = 'TESTSXE';
     const reNumDecimals = new RegExp(`\\.0{${decimals.length}}\\s`);
 
-    describe('when created', () => {
+    describe(`when creating ${max} ${symbol}`, () => {
       let response;
       beforeAll(async () => {
         await createTokenAction({ account, max, symbol });
