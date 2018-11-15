@@ -79,6 +79,7 @@ jobs:
       - run: 'curl http://localhost:5555'
       - run: 'curl http://localhost:7777/v1/chain/get_info'
       - run: node --version
+      - run: npm test
 workflows:
   version: 2
   dev:
