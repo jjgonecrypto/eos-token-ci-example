@@ -2,7 +2,6 @@
 
 const path = require('path');
 const ecc = require('eosjs-ecc');
-const { green } = require('chalk');
 const { api } = require('./config');
 const { sendTransaction, getErrorDetail, deployContract } = require('./utils');
 
