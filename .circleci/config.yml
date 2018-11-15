@@ -3,7 +3,7 @@ jobs:
   prepare:
     docker:
       - image: 'circleci/node:8.11'
-    working_directory: null
+    working_directory: '~'
     steps:
       - checkout
       - run: git submodule update --init --recursive
@@ -25,7 +25,7 @@ jobs:
   compile:
     docker:
       - image: 'justinjmoses/eosio-cdt:1.4.1'
-    working_directory: null
+    working_directory: '~'
     steps:
       - checkout
       - attach_workspace:
@@ -33,9 +33,8 @@ jobs:
       - run:
           name: Test
           command: >
-            mkdir build
-
-            eosio-cpp eosio.contracts/eosio.token/src/eosio.token.cpp -I
+            mkdir build && \ eosio-cpp
+            eosio.contracts/eosio.token/src/eosio.token.cpp -I \
             eosio.contracts/eosio.token/include/ -o build/eosio.token.wasm
       - persist_to_workspace:
           root: .
@@ -68,7 +67,7 @@ jobs:
           - '--contracts-console'
           - '--http-validate-host=false'
           - '--filter-on=*'
-    working_directory: null
+    working_directory: '~'
     steps:
       - checkout
       - attach_workspace:
