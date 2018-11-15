@@ -1,5 +1,6 @@
 'use strict';
 
+const util = require('util');
 const { red } = require('chalk');
 const { api } = require('../config.js');
 
@@ -42,7 +43,7 @@ function getErrorDetail(error) {
   } catch (e) {
     if (typeof error.json === 'undefined') return red(error);
     const { message, error: { code, name, what, details } = {} } = error.json;
-    return red(message + (name ? `. ${name} (${code}): ${what}. ${details}` : ''));
+    return red(message + (name ? `. ${name} (${code}): ${what}. \n${util.inspect(details)}` : ''));
   }
 }
 

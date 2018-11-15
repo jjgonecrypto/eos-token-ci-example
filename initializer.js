@@ -69,18 +69,14 @@ module.exports = {
 
   async createTokenAction({ account, max, symbol }) {
     const name = 'create';
-    try {
-      await sendTransaction({
-        account,
-        name,
-        actor: account,
-        data: {
-          issuer: 'eosio',
-          maximum_supply: `${max} ${symbol}`,
-        },
-      });
-    } catch (error) {
-      console.error(`Could not invoke action ${green(name)}: ${symbol} `, getErrorDetail(error));
-    }
+    await sendTransaction({
+      account,
+      name,
+      actor: account,
+      data: {
+        issuer: 'eosio',
+        maximum_supply: `${max} ${symbol}`,
+      },
+    });
   },
 };

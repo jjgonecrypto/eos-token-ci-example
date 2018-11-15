@@ -58,6 +58,7 @@ jobs:
           - '--access-control-allow-origin=*'
           - '--contracts-console'
           - '--http-validate-host=false'
+          - '--verbose-http-errors'
           - '--filter-on=*'
     steps:
       - checkout

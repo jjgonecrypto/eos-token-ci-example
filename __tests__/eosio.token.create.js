@@ -15,14 +15,13 @@ describe('eosio.token', () => {
     await deployTokenContract({ account });
   });
 
-  // Nodeos endpoints
-  // https://developers.eos.io/eosio-nodeos/reference
-
   describe('create action', () => {
     const maxSupply = '100';
     const decimals = '000';
     const max = `${maxSupply}.${decimals}`;
-    const symbol = 'TEP';
+    // using the same symbol as a pre-existing one will fail
+    // (once the preexiting one is committed to the blockchain)
+    const symbol = 'TESTSXE';
     const reNumDecimals = new RegExp(`\\.0{${decimals.length}}\\s`);
 
     describe('when created', () => {
