@@ -3,7 +3,6 @@ jobs:
   prepare:
     docker:
       - image: 'circleci/node:8.11'
-    working_directory: '~'
     steps:
       - checkout
       - run: git submodule update --init --recursive
@@ -25,7 +24,6 @@ jobs:
   compile:
     docker:
       - image: 'justinjmoses/eosio-cdt:1.4.1'
-    working_directory: '~'
     steps:
       - checkout
       - attach_workspace:
@@ -67,7 +65,6 @@ jobs:
           - '--contracts-console'
           - '--http-validate-host=false'
           - '--filter-on=*'
-    working_directory: '~'
     steps:
       - checkout
       - attach_workspace:
