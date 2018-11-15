@@ -1,9 +1,6 @@
 'use strict';
 
-// const { sendTransaction } = require('../utils');
-
-// const { CONTRACT_ACCOUNT } = process.env;
-const { createTokenAccount, deployTokenContract } = require('../initializer');
+const { createTokenAccount, deployTokenContract, createTokenAction } = require('../initializer');
 
 describe('contract', () => {
   jest.setTimeout(20e3);
@@ -16,6 +13,7 @@ describe('contract', () => {
   beforeAll(async () => {
     await createTokenAccount({ account });
     await deployTokenContract({ account });
+    await createTokenAction({ account, max: '100.000', symbol: 'TEST' });
   });
 
   test('something', async () => {

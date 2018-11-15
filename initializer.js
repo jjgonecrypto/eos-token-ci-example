@@ -66,7 +66,7 @@ module.exports = {
     await deployContract({ account, contractDir });
   },
 
-  async issueEosToken({ account }) {
+  async createTokenAction({ account, max, symbol }) {
     try {
       await sendTransaction({
         account,
@@ -74,24 +74,11 @@ module.exports = {
         actor: account,
         data: {
           issuer: 'eosio',
-          maximum_supply: '1000000000.0000 SYS',
+          maximum_supply: `${max} ${symbol}`,
         },
       });
     } catch (error) {
-      console.error('Could not issue token: SYS ', getErrorDetail(error));
-    }
-    try {
-      await sendTransaction({
-        account: account,
-        name: 'create',
-        actor: account,
-        data: {
-          issuer: 'eosio',
-          maximum_supply: '1000000000.0000 EOS',
-        },
-      });
-    } catch (error) {
-      console.error('Could not issue token: EOS ', getErrorDetail(error));
+      console.error(`Could not issue token: ${symbol} `, getErrorDetail(error));
     }
   },
 };

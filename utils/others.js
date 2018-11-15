@@ -40,6 +40,7 @@ function getErrorDetail(error) {
     const json = typeof error === 'string' ? JSON.parse(error) : JSON.parse(error.message);
     return json.error.details[0].message;
   } catch (e) {
+    if (typeof error.json === 'undefined') return red(error);
     const { message, error: { code, name, what, details } = {} } = error.json;
     return red(message + (name ? `. ${name} (${code}): ${what}. ${details}` : ''));
   }

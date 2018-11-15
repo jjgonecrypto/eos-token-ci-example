@@ -28,18 +28,11 @@ jobs:
       - checkout
       - attach_workspace:
           at: .
-      - run:
-          name: Test
-          command: >
-            mkdir build && eosio-cpp
-            eosio.contracts/eosio.token/src/eosio.token.cpp -I
-            eosio.contracts/eosio.token/include/ -o build/eosio.token.wasm
-            --abigen
+      - run: ./compile-contracts.sh
       - persist_to_workspace:
           root: .
           paths:
             - node_modules
-            - eosio.contracts
             - build
   test:
     docker:
