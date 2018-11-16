@@ -23,7 +23,7 @@
     "prettier": "~1.15.2"
   },
   "scripts": {
-    "compile": "bash compile-contracts.sh",
+    "compile": "./compile-contracts.sh",
     "eos:start": "./docker/start-docker.sh",
     "eos:stop": "./docker/stop-docker.sh",
     "format": "prettier --write \"*.js\"",

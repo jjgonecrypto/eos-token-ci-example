@@ -23,7 +23,7 @@ jobs:
             - eosio.contracts
   compile:
     docker:
-      - image: 'justinjmoses/eosio-cdt:1.4.1'
+      - image: 'justinjmoses/eosio-ci:1.4.3'
     steps:
       - checkout
       - attach_workspace:
@@ -37,29 +37,12 @@ jobs:
   test:
     docker:
       - image: 'circleci/node:8.11'
-      - image: 'eosio/eos:v1.4.3'
+      - image: 'justinjmoses/eosio-ci:1.4.3'
         command:
-          - keosd
-          - '--http-server-address=0.0.0.0:5555'
-      - image: 'eosio/eos:v1.4.3'
+          - /start-keosd.sh
+      - image: 'justinjmoses/eosio-ci:1.4.3'
         command:
-          - nodeos
-          - '--http-server-address=0.0.0.0:7777'
-          - '--plugin=eosio::producer_plugin'
-          - '--plugin=eosio::http_plugin'
-          - '--plugin=eosio::chain_api_plugin'
-          - '--plugin=eosio::history_plugin'
-          - '--plugin=eosio::history_api_plugin'
-          - '--plugin=eosio::http_plugin'
-          - '--data-dir=/mnt/dev/data'
-          - '--enable-stale-production'
-          - '--producer-name=eosio'
-          - '--config-dir=/mnt/dev/config'
-          - '--access-control-allow-origin=*'
-          - '--contracts-console'
-          - '--http-validate-host=false'
-          - '--verbose-http-errors'
-          - '--filter-on=*'
+          - /start-nodeos.sh
     steps:
       - checkout
       - attach_workspace:
