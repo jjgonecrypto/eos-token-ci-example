@@ -4,7 +4,7 @@
 
 > Updated as of EOS **v1.4.3**
 
-This repo takes the EOSIO.token example and wraps it in a nodejs testing and deployment environment.
+This repo takes the EOSIO.token example and wraps it in a testing environment that supports nodejs.
 
 > Note: much of this was inspired by the work of @MrToph with his Yeoman generator https://github.com/MrToph/generator-eos
 
@@ -14,8 +14,22 @@ This repo takes the EOSIO.token example and wraps it in a nodejs testing and dep
 
 **Developing tokens yourself?** [Here's a list of gotchas for would-be token developers](./EOSTokenGotchas.md), especially for those coming from Ethereum ERC20 standards.
 
-## Local tools required
+## Setup
 
-* EOS (`nodeos` and `keosd`) for running a local EOS node and a local wallet respectively for testing purposes. Note: while `cleos` will be installed along with the other tools, it isn't necessary for interacting with the local node as we'll use [eosjs](https://github.com/EOSIO/eosjs) for that.
-* `eosio-cpp` from [eosio.cdt](https://github.com/EOSIO/eosio.cdt) for compiling the C++ smart contracts to Web Assembly (WASM)
+1. Install Docker
+1. Pull down the latest CI image (`docker pull justinjmoses/eosio-ci`)
+1. Run `git submodule update --init --recursive` to get the contract code
 
+## Write your code and test
+
+1. Change the `eosio.token` files as needed
+1. Run `compile-contracts.sh` which puts the `eosio.token` WASM and ABI into `/build`
+1. Run `npm run test-with-eos`
+
+## Continuous Integration
+
+- CI is supplied via [CircleCI](./.circleci/config.yml)
+
+## Future work
+
+... deployments!

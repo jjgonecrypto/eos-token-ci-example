@@ -2,8 +2,12 @@
 
 set -eox pipefail
 
-mkdir -p build;
-pushd build;
-# running this outside of the same folder where the WASM is generated seems to not generate a correct ABI
-# https://github.com/EOSIO/eosio.cdt/issues/281
-eosio-cpp ../eosio.contracts/eosio.token/src/eosio.token.cpp -I ../eosio.contracts/eosio.token/include/ -o eosio.token.wasm --abigen || popd
+mkdir -p build
+
+# run a container to compile
+docker run \
+--rm \
+--mount type=bind,source="$(pwd)"/eosio.contracts/eosio.token,destination=/eosio.token \
+--mount type=bind,source="$(pwd)"/build,destination=/build \
+ justinjmoses/eosio-ci \
+ /bin/bash -c "cd /build && eosio-cpp /eosio.token/src/eosio.token.cpp -I /eosio.token/include/ -o eosio.token.wasm --abigen"

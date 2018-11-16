@@ -24,8 +24,11 @@
   },
   "scripts": {
     "compile": "bash compile-contracts.sh",
+    "eos:start": "./docker/start-docker.sh",
+    "eos:stop": "./docker/stop-docker.sh",
     "format": "prettier --write \"*.js\"",
     "lint": "eslint .",
+    "test-with-eos": "npm run eos:start; npm test; EXIT_CODE=$?; npm run eos:stop; exit $EXIT_CODE",
     "test": "jest"
   },
   "repository": {

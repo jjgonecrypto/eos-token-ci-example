@@ -57,7 +57,7 @@ module.exports = {
         },
       ]);
     } catch (error) {
-      console.error('Could not creae account: ', getErrorDetail(error));
+      console.error('Could not create account: ', getErrorDetail(error));
     }
   },
 
