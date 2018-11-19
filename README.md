@@ -16,15 +16,15 @@ This repo takes the EOSIO.token example and wraps it in a testing environment th
 
 ## Setup
 
+1. Clone this repo (either with `--recursive` flag or run `git submodule update --init --recursive` after cloning to get the contract code)
 1. Install Docker
 1. Pull down the latest CI image (`docker pull justinjmoses/eosio-ci`)
-1. Run `git submodule update --init --recursive` to get the contract code
 
 ## Write your code and test
 
 1. Change the `eosio.token` files as needed
-1. Run `compile-contracts.sh` which puts the `eosio.token` WASM and ABI into `/build`
-1. Run `npm run test-with-eos`
+1. Run `npm run compile:docker` which puts the `eosio.token` WASM and ABI into the `build` folder. Alternatively if you have `eosio-cpp` installed (via `eosio.cdt`), you can run `npm run compile` which is a bit faster.
+1. Run `npm run test:docker`
 
 ## Continuous Integration
 

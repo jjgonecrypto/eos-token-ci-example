@@ -5,7 +5,6 @@ jobs:
       - image: 'circleci/node:8.11'
     steps:
       - checkout
-      - run: git submodule update --init --recursive
       - restore_cache:
           keys:
             - 'v1.0-dependencies-{{ checksum "package.json" }}'
@@ -20,15 +19,15 @@ jobs:
           root: .
           paths:
             - node_modules
-            - eosio.contracts
   compile:
     docker:
       - image: 'justinjmoses/eosio-ci:1.4.3'
     steps:
       - checkout
+      - run: git submodule update --init --recursive
       - attach_workspace:
           at: .
-      - run: ./compile-contracts.sh
+      - run: ./scripts/compile-contracts-locally.sh
       - persist_to_workspace:
           root: .
           paths:
@@ -52,7 +51,6 @@ jobs:
       - run: ls -lat build
       - run: 'curl http://localhost:5555'
       - run: 'curl http://localhost:7777/v1/chain/get_info'
-      - run: node --version
       - run: npm test
 workflows:
   version: 2
