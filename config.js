@@ -1,5 +1,8 @@
 'use strict';
 
+// code from
+// https://github.com/MrToph/generator-eos/blob/2.4.0/generators/app/templates/config.js
+
 const { Api, JsonRpc, JsSignatureProvider } = require('eosjs');
 const fetch = require('node-fetch'); // node only; not needed in browsers
 const { TextEncoder, TextDecoder } = require('util'); // node only; native TextEncoder/Decoder

@@ -1,5 +1,8 @@
 'use strict';
 
+// code taken from
+// https://github.com/MrToph/generator-eos/blob/2.4.0/generators/app/templates/scripts/init_blockchain/index.js
+
 const path = require('path');
 const ecc = require('eosjs-ecc');
 const { api } = require('./config');

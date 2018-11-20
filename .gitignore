@@ -62,6 +62,6 @@ typings/
 
 .vscode
 
-build/.
+build/*
 
 tmp/

@@ -1,5 +1,8 @@
 'use strict';
 
+// code from
+// https://github.com/MrToph/generator-eos/blob/2.4.0/generators/app/templates/utils/others.js
+
 const util = require('util');
 const { red } = require('chalk');
 const { api } = require('../config.js');

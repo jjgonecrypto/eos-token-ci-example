@@ -1,5 +1,8 @@
 'use strict';
 
+// code from
+// https://github.com/MrToph/generator-eos/blob/2.4.0/generators/app/templates/utils/deploy.js
+
 const fs = require('fs');
 const path = require('path');
 const { Serialize } = require('eosjs');
