@@ -21,7 +21,7 @@ jobs:
             - node_modules
   compile:
     docker:
-      - image: 'justinjmoses/eosio-ci:1.4.3'
+      - image: 'justinjmoses/eosio-ci:1.4.4'
     steps:
       - checkout
       - run: git submodule update --init --recursive
@@ -36,10 +36,10 @@ jobs:
   test:
     docker:
       - image: 'circleci/node:8.11'
-      - image: 'justinjmoses/eosio-ci:1.4.3'
+      - image: 'justinjmoses/eosio-ci:1.4.4'
         command:
           - /start-keosd.sh
-      - image: 'justinjmoses/eosio-ci:1.4.3'
+      - image: 'justinjmoses/eosio-ci:1.4.4'
         command:
           - /start-nodeos.sh
     steps:
