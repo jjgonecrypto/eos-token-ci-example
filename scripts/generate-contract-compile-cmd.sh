@@ -37,4 +37,4 @@ EOF
 done
 shift $((OPTIND -1))
 
-echo $(generate_command "$prefix_path")
+generate_command "$prefix_path"
