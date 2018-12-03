@@ -14,6 +14,7 @@
   "devDependencies": {
     "babel-eslint": "~10.0.1",
     "chai": "~4.2.0",
+    "eosio-ci": "~1.4.4",
     "eslint": "~5.9.0",
     "eslint-config-last": "0.0.5",
     "eslint-config-prettier": "~3.3.0",
@@ -25,8 +26,8 @@
   "scripts": {
     "compile": "./scripts/compile-contracts-locally.sh",
     "compile:docker": "./scripts/compile-contracts-on-docker.sh",
-    "eos:docker:start": "./scripts/start-eos-on-docker.sh",
-    "eos:docker:stop": "./scripts/stop-eos-on-docker.sh",
+    "eos:docker:start": "./node_modules/eosio-ci/scripts/start-eos.sh",
+    "eos:docker:stop": "./node_modules/eosio-ci/scripts/stop-eos.sh",
     "format": "prettier --write \"*.js\"",
     "lint": "eslint .",
     "test:docker": "npm run eos:docker:start; npm test; EXIT_CODE=$?; npm run eos:docker:stop; exit $EXIT_CODE",
