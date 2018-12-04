@@ -2,12 +2,8 @@
 
 set -eox pipefail
 
-# get parent dir of this script file
-ROOT_PATH=$(printf '%q' "$(cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd)")
-
-SCRIPT_CONTENTS=$(eval "$ROOT_PATH/scripts/generate-contract-compile-cmd.sh")
-
-echo "Running:"
-echo "$SCRIPT_CONTENTS"
-
-eval "$SCRIPT_CONTENTS"
+eosio-cpp eosio.contracts/eosio.token/src/eosio.token.cpp \
+  -I eosio.contracts/eosio.token/include/ \
+  -o build/eosio.token.wasm \
+  --abigen \
+  -contract=eosio.token
