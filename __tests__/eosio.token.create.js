@@ -1,8 +1,8 @@
 'use strict';
 
 const expect = require('chai').expect;
-const { api } = require('../config');
-const { createTokenAccount, deployTokenContract, createTokenAction } = require('../initializer');
+const path = require('path');
+const eos = require('eosjs-node').connect({ url: 'http://127.0.0.1:7777' });
 
 describe('eosio.token', () => {
   jest.setTimeout(20e3);
@@ -11,8 +11,12 @@ describe('eosio.token', () => {
 
   // deploy contract
   beforeAll(async () => {
-    await createTokenAccount({ account });
-    await deployTokenContract({ account });
+    await eos.createAccount({ account });
+    await eos.deploy({
+      account,
+      contract: 'eosio.token',
+      contractDir: path.join(__dirname, '..', 'build'),
+    });
   });
 
   describe('create action', () => {
@@ -27,8 +31,16 @@ describe('eosio.token', () => {
     describe(`when creating ${max} ${symbol}`, () => {
       let response;
       beforeAll(async () => {
-        await createTokenAction({ account, max, symbol });
-        response = (await api.rpc.get_currency_stats(account, symbol))[symbol];
+        const createTokenAction = eos.createAction({
+          name: 'create',
+          account,
+          actor: account,
+          data: { maximum_supply: `${max} ${symbol}`, issuer: 'eosio' },
+        });
+
+        await eos.sendTransaction(createTokenAction);
+
+        response = (await eos.api.rpc.get_currency_stats(account, symbol))[symbol];
       });
 
       test('then the currency stats are available', () => {
