@@ -14,7 +14,7 @@
   "devDependencies": {
     "babel-eslint": "~10.0.1",
     "chai": "~4.2.0",
-    "eosio-ci": "~1.4.5-1",
+    "eosio-ci": "~1.4.5-2",
     "eslint": "~5.9.0",
     "eslint-config-last": "0.0.5",
     "eslint-config-prettier": "~3.3.0",
